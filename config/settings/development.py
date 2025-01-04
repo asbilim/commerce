@@ -3,6 +3,8 @@ from .base import *
 DEBUG = True
 ALLOWED_HOSTS = ['*']
 
+INSTALLED_APPS++['debug_toolbar']
+
 
 # Example: override DB if using Postgres locally
 # DATABASES = {

@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 DEBUG = False
-ALLOWED_HOSTS = ['myproductiondomain.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Secure settings, logging, etc.

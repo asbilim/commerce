@@ -143,3 +143,19 @@ AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_BUCKET_NAME')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+
+
+# Email Settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.gmail.com')  # or your SMTP server
+EMAIL_PORT = os.getenv('EMAIL_PORT', 587)  # Common ports: 587 (TLS) or 465 (SSL)
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', True)
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')  # Your email address
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')  # Your email password or app-specific password
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'noreply@commerce.com')
+
+# Optional email settings
+EMAIL_TIMEOUT = 30  # Timeout in seconds
+EMAIL_SUBJECT_PREFIX = '[Commerce Notification] '  # Prefix for email subjects
+SERVER_EMAIL = os.getenv('SERVER_EMAIL', 'wednesday.mxrouting.net')  # Email for error notifications

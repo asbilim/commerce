@@ -43,6 +43,7 @@ class User(UUIDModel, AbstractUser):
     two_factor_enabled = models.BooleanField(default=False)
     tos_accepted = models.BooleanField(default=False)
     tos_accepted_at = models.DateTimeField(null=True, blank=True)
+    is_active = models.BooleanField(default=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 

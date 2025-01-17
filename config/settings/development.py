@@ -33,3 +33,35 @@ AWS_S3_FILE_OVERWRITE = False
 AWS_QUERYSTRING_AUTH = False  # if you don't want querystring tokens
 
 # Other security / caching / etc. can be configured similarly.
+
+print("EMAIL_HOST:", os.getenv('EMAIL_HOST'))
+print("EMAIL_PORT:", os.getenv('EMAIL_PORT'))
+print("EMAIL_HOST_USER:", os.getenv('EMAIL_HOST_USER'))
+print("EMAIL_HOST_COMMERCE_PASSWORD:", os.getenv('EMAIL_HOST_COMMERCE_PASSWORD'))
+print("EMAIL_USE_TLS:", os.getenv('EMAIL_USE_TLS'))
+
+import smtplib
+smtplib.debuglevel = 1
+
+EMAIL_DEBUG = True  # Add this to your settings
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': 'email_debug.log',
+        },
+    },
+    'loggers': {
+        'django.core.mail': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}

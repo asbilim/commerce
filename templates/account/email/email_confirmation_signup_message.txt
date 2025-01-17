@@ -1,0 +1,14 @@
+{% load account %}
+{% user_display user as user_display %}
+{% autoescape off %}
+Hi {{ user_display }},
+
+Thank you for signing up! To activate your account, please confirm your email address by clicking the link below:
+
+{{ activate_url }}
+
+If you didn't request this, you can safely ignore this email.
+
+Best regards,
+Your Site Team
+{% endautoescape %}

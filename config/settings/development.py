@@ -40,28 +40,5 @@ print("EMAIL_HOST_USER:", os.getenv('EMAIL_HOST_USER'))
 print("EMAIL_HOST_COMMERCE_PASSWORD:", os.getenv('EMAIL_HOST_COMMERCE_PASSWORD'))
 print("EMAIL_USE_TLS:", os.getenv('EMAIL_USE_TLS'))
 
-import smtplib
-smtplib.debuglevel = 1
 
-EMAIL_DEBUG = True  # Add this to your settings
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-        'file': {
-            'class': 'logging.FileHandler',
-            'filename': 'email_debug.log',
-        },
-    },
-    'loggers': {
-        'django.core.mail': {
-            'handlers': ['console', 'file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-    },
-}
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

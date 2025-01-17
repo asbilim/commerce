@@ -180,13 +180,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 
 # Email Settings
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 EMAIL_HOST = os.getenv('EMAIL_HOST', 'wednesday.mxrouting.net')  # or your SMTP server
 EMAIL_PORT = os.getenv('EMAIL_PORT', 587)  # Common ports: 587 (TLS) or 465 (SSL)
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER','commerce@devsplug.com')  # Your email address
-EMAIL_HOST_COMMERCE_PASSWORD = os.getenv('EMAIL_HOST_COMMERCE_PASSWORD')  # Your email password or app-specific password
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_COMMERCE_PASSWORD')  # Your email password or app-specific password
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'commerce@devsplug.com')
 
 # Optional email settings

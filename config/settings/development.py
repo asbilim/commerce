@@ -34,11 +34,6 @@ AWS_QUERYSTRING_AUTH = False  # if you don't want querystring tokens
 
 # Other security / caching / etc. can be configured similarly.
 
-print("EMAIL_HOST:", os.getenv('EMAIL_HOST'))
-print("EMAIL_PORT:", os.getenv('EMAIL_PORT'))
-print("EMAIL_HOST_USER:", os.getenv('EMAIL_HOST_USER'))
-print("EMAIL_HOST_COMMERCE_PASSWORD:", os.getenv('EMAIL_HOST_COMMERCE_PASSWORD'))
-print("EMAIL_USE_TLS:", os.getenv('EMAIL_USE_TLS'))
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

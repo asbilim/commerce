@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Confirmation</title>
+    <script>
+        // Redirect after a short delay
+        setTimeout(function() {
+            window.location.href = "{{ redirect_url }}";
+        }, 3000); // Redirect after 2 seconds (adjust the delay as needed)
+    </script>
+</head>
+<body>
+    <h1>Email Confirmation</h1>
+    <p>Redirecting you to the appropriate page...</p>
+    <p>If you are not redirected automatically, <a href="{{ redirect_url }}">click here</a>.</p>
+</body>
+</html>

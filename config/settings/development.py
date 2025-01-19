@@ -98,3 +98,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 #         'level': 'DEBUG',
 #     },
 # }
+
+
+DEBUG_TOOLBAR_CONFIG['IS_RUNNING_TESTS'] = False

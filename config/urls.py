@@ -1,7 +1,10 @@
+from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include, re_path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
-from apps.users.views import CustomConfirmEmailView
+from allauth.socialaccount.providers.google.views import oauth2_login
+from apps.users.views import CustomConfirmEmailView, GoogleLoginView
+
 
 urlpatterns = [
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
@@ -15,5 +18,15 @@ urlpatterns = [
     ),
     path('auth/registration/', include('dj_rest_auth.registration.urls')),
     path(r'^accounts/', include('allauth.urls')),
+    path('auth/google/', GoogleLoginView.as_view(), name='google_login'),
+    path('auth/google/callback/', include('allauth.socialaccount.providers.google.urls')),
     
 ]
+
+
+if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns += [
+        path(r'^__debug__/', include(debug_toolbar.urls)),
+    ]

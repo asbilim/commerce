@@ -34,34 +34,13 @@ class GoogleLoginView(SocialLoginView):
 
 
 class CustomConfirmEmailView(ConfirmEmailView):
-    def get(self, request, *args, **kwargs):
+    def get(self, *args, **kwargs):
         try:
             self.object = self.get_object()
-            confirmation = self.object.confirm(request)
-            
-            auth_config = AuthenticationConfig.get_settings()
-            frontend_url = auth_config['FRONTEND']['BASE_URL']
-            success_path = auth_config['FRONTEND']['SUCCESS_REDIRECT']
-
-            redirect_url = f"{frontend_url}{success_path}"
-
-            context = {
-                'redirect_url': redirect_url,
-                'user': confirmation.email_address.user
-            }
-            
-            response = render_to_string(
-                auth_config['EMAIL']['VERIFICATION_TEMPLATE'],
-                context,
-                request
-            )
-            
-            return HttpResponseRedirect(redirect_url)
-            
-        except Exception as e:
-            print(f"Error confirming email: {e}")
-            error_path = auth_config['FRONTEND']['ERROR_REDIRECT']
-            return HttpResponseRedirect(f"{frontend_url}{error_path}")
+            self.object.confirm(self.request)
+            return HttpResponseRedirect(f"{settings.WEBSITE_FRONTEND_URL}/email-verified")
+        except Exception:
+            return HttpResponseRedirect(f"{settings.WEBSITE_FRONTEND_URL}/email-verification-failed")
         
 
 class GoogleOneTapView(SocialLoginView):

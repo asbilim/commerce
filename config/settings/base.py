@@ -248,6 +248,10 @@ REST_AUTH = {
     'REGISTER_SERIALIZER': 'dj_rest_auth.registration.serializers.RegisterSerializer',
     'TOKEN_MODEL': None,
     'SESSION_LOGIN': True,
+    'PASSWORD_RESET_SERIALIZER': 'dj_rest_auth.serializers.PasswordResetSerializer',
+    'PASSWORD_RESET_CONFIRM_SERIALIZER': 'dj_rest_auth.serializers.PasswordResetConfirmSerializer',
+    'PASSWORD_CHANGE_SERIALIZER': 'dj_rest_auth.serializers.PasswordChangeSerializer',
+
 }
 
 # --------------------------------------------------------------------------
@@ -259,7 +263,7 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
-ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = False
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = "http"  # Change to "https" in production
 ACCOUNT_ADAPTER = 'config.adapters.accounts.CustomAccountAdapter'
@@ -278,7 +282,7 @@ TEMPLATE_EXTENSION = 'html'
 # SITE SETTINGS
 # --------------------------------------------------------------------------
 SITE_ID = 2
-WEBSITE_FRONTEND_URL = 'https://somefrontend.com'
+WEBSITE_FRONTEND_URL = 'http://localhost:8000'
 
 # --------------------------------------------------------------------------
 # DRF SPECTACULAR SETTINGS (Optional)

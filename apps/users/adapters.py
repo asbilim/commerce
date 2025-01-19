@@ -86,12 +86,5 @@ class CustomAccountAdapter(DefaultAccountAdapter):
         """
         Constructs the email confirmation (activation) url.
         """
-        return f"{settings.WEBSITE_FRONTEND_URL}/auth/verify-email/{emailconfirmation.key}" 
+        return f"{settings.WEBSITE_FRONTEND_URL}/auth/registration/account-confirm-email/{emailconfirmation.key}" 
 
-
-class CustomAccountAdapter(DefaultAccountAdapter):
-    def get_email_confirmation_url(self, request, emailconfirmation):
-        """
-        Constructs the email confirmation (activation) url.
-        """
-        return f"{settings.WEBSITE_FRONTEND_URL}/auth/verify-email/{emailconfirmation.key}"

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Auth Test</title>
+  </head>
+  <body>
+    <h2>Test Authentication</h2>
+
+    <h3>Google Sign In</h3>
+    <div
+      id="g_id_onload"
+      data-client_id="365355472474-jfjsjof6stgjjr9bb8c1eaetkfds2mq8.apps.googleusercontent.com"
+      data-context="signup"
+      data-ux_mode="popup"
+      data-callback="handleCredentialResponse"
+      data-auto_prompt="false"></div>
+    <div
+      class="g_id_signin"
+      data-type="standard"
+      data-shape="rectangular"
+      data-theme="outline"
+      data-text="continue_with"
+      data-size="large"
+      data-logo_alignment="left"></div>
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+      async function handleCredentialResponse(response) {
+        try {
+          // 1) Log it
+          console.log("Google One Tap Response", response);
+
+          // 2) POST to your new endpoint:
+          const backendResponse = await fetch(
+            "http://localhost:8000/auth/google/onetap/", // <--- Updated
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": getCookie("csrftoken"), // if you have CSRF in place
+              },
+              body: JSON.stringify({
+                id_token: response.credential,
+              }),
+            }
+          );
+
+          const data = await backendResponse.json();
+          console.log("Backend response:", data);
+
+          if (backendResponse.ok) {
+            // 3) If everything is good:
+            console.log("Auth success!");
+            // Maybe redirect or show a message
+            window.location.href = "/dashboard";
+          } else {
+            // 4) Error
+            console.error("Auth failed:", data);
+          }
+        } catch (error) {
+          console.error("Error during authentication:", error);
+        }
+      }
+
+      // Basic CSRF cookie reading:
+      function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== "") {
+          const cookies = document.cookie.split(";");
+          for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === name + "=") {
+              cookieValue = decodeURIComponent(
+                cookie.substring(name.length + 1)
+              );
+              break;
+            }
+          }
+        }
+        return cookieValue;
+      }
+    </script>
+  </body>
+</html>

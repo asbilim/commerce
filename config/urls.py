@@ -3,7 +3,9 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from allauth.socialaccount.providers.google.views import oauth2_login
-from apps.users.views import CustomConfirmEmailView, GoogleLoginView
+from apps.users.views import CustomConfirmEmailView, GoogleLoginView, GoogleOneTapView
+from django.views.generic import TemplateView
+
 
 
 urlpatterns = [
@@ -18,8 +20,10 @@ urlpatterns = [
     ),
     path('auth/registration/', include('dj_rest_auth.registration.urls')),
     path(r'^accounts/', include('allauth.urls')),
+    path('auth/callback/', include('allauth.socialaccount.providers.google.urls')),
+    path('auth/google/onetap/', GoogleOneTapView.as_view(), name='google_onetap'),
     path('auth/google/', GoogleLoginView.as_view(), name='google_login'),
-    path('auth/google/callback/', include('allauth.socialaccount.providers.google.urls')),
+    path('test/google/',TemplateView.as_view(template_name="backend/auth/test/google.html"))
     
 ]
 

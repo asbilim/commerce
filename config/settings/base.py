@@ -242,8 +242,8 @@ SIMPLE_JWT = {
 # --------------------------------------------------------------------------
 REST_AUTH = {
     'USE_JWT': True,
-    'JWT_AUTH_COOKIE': 'auth',
-    'JWT_AUTH_REFRESH_COOKIE': 'refresh',
+    'JWT_AUTH_COOKIE': 'access_token',
+    'JWT_AUTH_REFRESH_COOKIE': 'refresh_token',
     'JWT_AUTH_HTTPONLY': False,
     'REGISTER_SERIALIZER': 'dj_rest_auth.registration.serializers.RegisterSerializer',
     'TOKEN_MODEL': None,
@@ -263,6 +263,7 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = False
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = "http"  # Change to "https" in production
 ACCOUNT_ADAPTER = 'config.adapters.accounts.CustomAccountAdapter'
+SOCIALACCOUNT_ADAPTER = 'config.adapters.accounts.CustomAccountAdapter'
 
 # URL and Redirects
 LOGIN_URL = 'auth/login/'
@@ -276,14 +277,14 @@ TEMPLATE_EXTENSION = 'html'
 # --------------------------------------------------------------------------
 # SITE SETTINGS
 # --------------------------------------------------------------------------
-SITE_ID = 1
+SITE_ID = 2
 WEBSITE_FRONTEND_URL = 'https://somefrontend.com'
 
 # --------------------------------------------------------------------------
 # DRF SPECTACULAR SETTINGS (Optional)
 # --------------------------------------------------------------------------
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Your Project API',
+    'TITLE': 'Commerce API Documentation',
     'DESCRIPTION': 'API documentation for Your Project',
     'VERSION': '1.0.0',
     # Other settings...
@@ -292,28 +293,40 @@ SPECTACULAR_SETTINGS = {
 # --------------------------------------------------------------------------
 # GOOGLE OAUTH2 SETTINGS
 # --------------------------------------------------------------------------
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'APP': {
-            'client_id': os.getenv('GOOGLE_CLIENT_ID'),
-            'secret': os.getenv('GOOGLE_CLIENT_SECRET'),
-            'key': ''
-        },
-        'SCOPE': [
-            'profile',
-            'email',
-        ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
-        }
-    }
-}
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
+#         'APP': {
+#             'client_id': os.getenv('GOOGLE_CLIENT_ID'),
+#             'secret': os.getenv('GOOGLE_CLIENT_SECRET'),
+#             'key': ''
+#         },
+#         'SCOPE': [
+#             'profile',
+#             'email',
+#         ],
+#         'AUTH_PARAMS': {
+#             'access_type': 'online',
+#         }
+#     }
+# }
 
 # Additional OAuth Settings
-SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
-SOCIALACCOUNT_EMAIL_REQUIRED = True
-SOCIALACCOUNT_QUERY_EMAIL = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'  # Keep this as none for Google
 SOCIALACCOUNT_AUTO_SIGNUP = True
-SOCIALACCOUNT_EMAIL_AUTHENTICATION = True
-SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = True
+SOCIALACCOUNT_EMAIL_REQUIRED = True
+SOCIALACCOUNT_ADAPTER = 'apps.users.adapters.CustomSocialAccountAdapter'
+ACCOUNT_ADAPTER = 'apps.users.adapters.CustomAccountAdapter'
 
+
+#cors
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+]

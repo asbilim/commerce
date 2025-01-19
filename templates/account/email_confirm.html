@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Confirmation</title>
+    <script>
+        window.onload = function() {
+            // Get the frontend URL from backend
+            const redirectUrl = "{{ redirect_url|safe }}";
+            if (redirectUrl) {
+                setTimeout(function() {
+                    window.location.href = redirectUrl;
+                }, 2000);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Email Confirmed Successfully!</h1>
+    <p>Redirecting you to the application...</p>
+</body>
+</html>

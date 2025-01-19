@@ -5,7 +5,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from allauth.socialaccount.providers.google.views import oauth2_login
 from apps.users.views import CustomConfirmEmailView, GoogleLoginView, GoogleOneTapView
 from django.views.generic import TemplateView
-from apps.users.api.serializers import CustomPasswordResetConfirmView
+from apps.users.api.views import CustomPasswordResetConfirmView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -19,7 +19,11 @@ urlpatterns = [
     path('auth/callback/', include('allauth.socialaccount.providers.google.urls')),
     path('auth/google/onetap/', GoogleOneTapView.as_view(), name='google_onetap'),
     path('auth/google/', GoogleLoginView.as_view(), name='google_login'),
-    path('auth/password/reset/', CustomPasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    re_path(
+        r'^password/reset/confirm/(?P<uidb64>[A-Za-z0-9_\-]+)/(?P<token>[-\w]+)/$',
+        CustomPasswordResetConfirmView.as_view(),
+        name='password_reset_confirm'
+    ),
     path('auth/', include('dj_rest_auth.urls')),
     path('test/google/',TemplateView.as_view(template_name="backend/auth/test/google.html")),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),

@@ -19,7 +19,7 @@ class CustomPasswordResetConfirmSerializer(PasswordResetConfirmSerializer):
     )
 
     def validate(self, attrs):
-        # You can add custom validation logic here if needed
+        
         return super().validate(attrs)
 
     def save(self, **kwargs):

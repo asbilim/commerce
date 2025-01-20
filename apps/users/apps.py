@@ -12,4 +12,5 @@ class UsersConfig(AppConfig):
         - You can import signals here if you need them later.
         - For now, we'll leave it empty since we don't want signals or extra logic.
         """
-        import apps.users.signals
+        # import apps.users.signals
+        pass
